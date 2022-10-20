@@ -4,6 +4,8 @@ import AppError from '@shared/errors/AppError';
 import UserTokensRepository from './../typeorm/repositories/UserTokenRespository';
 import UsersRepository from '../typeorm/repositories/UsersRepositories';
 
+import EtherealMail from '@config/mail/EtherealMail';
+
 interface IRequest {
   email: string;
 }
@@ -18,10 +20,14 @@ class SendForgotPasswordEmailService {
     if (!user) {
       throw new AppError('user does not exist');
     }
-    console.log(user);
+    // console.log(user);
 
     const token = await userTokensRepository.generate(user.id);
-    console.log(token);
+    // console.log(token);
+    await EtherealMail.sendMail({
+      to: email,
+      body: `solicitação de redefinição de senha recebida : ${token?.token} `,
+    });
   }
 }
 
