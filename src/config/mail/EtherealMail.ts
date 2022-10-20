@@ -19,7 +19,7 @@ interface ITemplateVariables {
 }
 
 interface IParseMailTemplate {
-  template: string;
+  file: string;
   variables: ITemplateVariables;
 }
 
@@ -46,15 +46,15 @@ export default class EtherealMail {
 
     const message = await transporter.sendMail({
       from: {
-        name: from?.name || 'Suporte equipeApi',
-        address: from?.email || 'equipe@equipes.com ',
+        name: from?.name || 'Equipe API Vendas',
+        address: from?.email || 'equipe@apivendas.com.br',
       },
       to: {
         name: to.name,
         address: to.email,
       },
       subject,
-      text: await mailTemplate.parse(templateData),
+      html: await mailTemplate.parse(templateData),
     });
 
     console.log('Message sent: %s', message.messageId);
