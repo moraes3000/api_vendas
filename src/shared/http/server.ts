@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import 'dotenv/config';
 import express, { Response, Request, NextFunction } from 'express';
 import 'express-async-errors';
 import { errors } from 'celebrate';
@@ -39,7 +40,7 @@ app.use(
   },
 );
 
-app.listen(3333, () => {
+app.listen(`${process.env.APP_PORT}`, () => {
   // eslint-disable-next-line no-console
   console.log('🚀🚀🚀 Server started on port 3333!🚀🚀🚀');
 });
