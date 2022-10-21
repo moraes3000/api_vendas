@@ -3,7 +3,7 @@ import AppError from '@shared/errors/AppError';
 
 import Order from '../typeorm/entities/Order';
 import OrdersRepository from '../typeorm/repositories/OrdersRepository';
-import { ProductRepository } from '@modules/products/typeorm/repositories/ProductsRepository';
+import { ProductRepository } from './../../products/typeorm/repositories/ProductsRepository';
 import { CustomersRepositories } from './../../customers/typeorm/repositories/CustomersRepositories';
 
 interface IProduct {
@@ -19,21 +19,19 @@ interface IRequest {
 class CreateOrderService {
   public async execute({ customer_id, products }: IRequest): Promise<Order> {
     const ordersRepository = getCustomRepository(OrdersRepository);
-    const customerRepositories = getCustomRepository(CustomersRepositories);
-    const productsRepositories = getCustomRepository(ProductRepository);
+    const customersRepository = getCustomRepository(CustomersRepositories);
+    const productsRepository = getCustomRepository(ProductRepository);
 
-    const customerExists = await customerRepositories.findById(customer_id);
+    const customerExists = await customersRepository.findById(customer_id);
 
     if (!customerExists) {
-      throw new AppError(
-        `Could not find any customer with the given id ${customer_id}`,
-      );
+      throw new AppError('Could not find any customer with the given id.');
     }
 
-    const existsProducts = await productsRepositories.findAllByIds(products);
+    const existsProducts = await productsRepository.findAllByIds(products);
 
     if (!existsProducts.length) {
-      throw new AppError(`Could not find any products with the given id`);
+      throw new AppError('Could not find any products with the given ids.');
     }
 
     const existsProductsIds = existsProducts.map(product => product.id);
@@ -42,9 +40,9 @@ class CreateOrderService {
       product => !existsProductsIds.includes(product.id),
     );
 
-    if (!checkInexistentProducts.length) {
+    if (checkInexistentProducts.length) {
       throw new AppError(
-        `Could not find any products with the given ids ${checkInexistentProducts[0].id}`,
+        `Could not find product ${checkInexistentProducts[0].id}.`,
       );
     }
 
@@ -54,9 +52,10 @@ class CreateOrderService {
         product.quantity,
     );
 
-    if (!quantityAvailable.length) {
+    if (quantityAvailable.length) {
       throw new AppError(
-        `The quantity ${quantityAvailable[0].quantity} is not available for ${quantityAvailable[0].id}`,
+        `The quantity ${quantityAvailable[0].quantity}
+         is not available for ${quantityAvailable[0].id}.`,
       );
     }
 
@@ -71,16 +70,16 @@ class CreateOrderService {
       products: serializedProducts,
     });
 
-    const { order_product } = order;
+    const { order_products } = order;
 
-    const updatedProductQuantity = order_product.map(product => ({
+    const updatedProductQuantity = order_products.map(product => ({
       id: product.product_id,
       quantity:
         existsProducts.filter(p => p.id === product.product_id)[0].quantity -
         product.quantity,
     }));
 
-    await productsRepositories.save(updatedProductQuantity);
+    await productsRepository.save(updatedProductQuantity);
 
     return order;
   }

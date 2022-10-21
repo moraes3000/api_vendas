@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+
 import CreateOrderService from '../services/CreateOrderService';
 import ShowOrderService from '../services/ShowOrderService';
 
@@ -18,7 +19,10 @@ export default class OrdersController {
 
     const createOrder = new CreateOrderService();
 
-    const order = await createOrder.execute({ customer_id, products });
+    const order = await createOrder.execute({
+      customer_id,
+      products,
+    });
 
     return response.json(order);
   }

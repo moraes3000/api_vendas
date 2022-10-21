@@ -15,7 +15,7 @@ class ShowOrderService {
     const order = await ordersRepository.findById(id);
 
     if (!order) {
-      throw new AppError(`order not found`);
+      throw new AppError('Order not found.');
     }
 
     return order;
