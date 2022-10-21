@@ -1,10 +1,10 @@
-import { CustomersRepositories } from './../../customers/typeorm/repositories/CustomersRepositories';
 import { getCustomRepository } from 'typeorm';
 import AppError from '@shared/errors/AppError';
+
 import Order from '../typeorm/entities/Order';
 import OrdersRepository from '../typeorm/repositories/OrdersRepository';
 import { ProductRepository } from '@modules/products/typeorm/repositories/ProductsRepository';
-import { exists } from 'fs';
+import { CustomersRepositories } from './../../customers/typeorm/repositories/CustomersRepositories';
 
 interface IProduct {
   id: string;
