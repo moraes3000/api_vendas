@@ -22,3 +22,14 @@ docker run --name postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=docker
 Criar container docker
 docker  run --name redis -p 6379:6379  -d -t redis:alpine
 ```
+
+
+
+ docker run  --name redis-client -v redisinsight:/db -p 8001:8001 -d -t redislabs/redisinsight:latest
+
+
+entrando no redis
+docker exec -it redis sh
+
+redis-cli
+
