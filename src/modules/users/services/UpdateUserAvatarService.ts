@@ -25,13 +25,17 @@ class UpdateUserAvatarService {
 
     if (uploadConfig.driver === 's3') {
       const s3Provider = new S3StorageProvider();
-      console.log(`aaa ==== ${user.avatar}`);
+
       if (user.avatar) {
         await s3Provider.deleteFile(user.avatar);
       }
-      const filename = await s3Provider.saveFile(avatarFilename);
 
-      user.avatar = filename;
+      try {
+        const filename = await s3Provider.saveFile(avatarFilename);
+        user.avatar = filename;
+      } catch (error) {
+        // console.log(`error ==== ${error}`);
+      }
     } else {
       const diskProvider = new DiskStorageProvider();
       if (user.avatar) {
