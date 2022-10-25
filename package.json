@@ -9,7 +9,8 @@
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
-    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files"
+    "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
+    "dev-build": "node dist/shared/http/server.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
