@@ -37,7 +37,7 @@ export default {
   },
   config: {
     aws: {
-      bucket: 'api-vendas-udemy',
+      bucket: process.env.AWS_NAME_BUCKET,
     },
   },
 } as IUploadConfig;
