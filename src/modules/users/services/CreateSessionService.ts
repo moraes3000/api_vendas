@@ -5,8 +5,8 @@ import { compare, hash } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import authConfig from '@config/auth';
 
-import User from '../typeorm/entities/User';
-import UsersRepository from '../typeorm/repositories/UsersRepositories';
+import User from '../infra/http/typeorm/entities/User';
+import UsersRepository from '../infra/http/typeorm/repositories/UsersRepositories';
 
 interface IRequest {
   email: string;

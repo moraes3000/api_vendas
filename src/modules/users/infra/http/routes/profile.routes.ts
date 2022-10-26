@@ -4,7 +4,7 @@ import { celebrate, Joi, Segments } from 'celebrate';
 import multer from 'multer';
 import uploadConfig from '@config/upload';
 
-import isAuthenticated from '../../../shared/infra/http/middlewares/isAuthenticated';
+import isAuthenticated from '../../../../../shared/infra/http/middlewares/isAuthenticated';
 import ProfileController from '../controllers/ProfileController';
 
 const profileRouter = Router();

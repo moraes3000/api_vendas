@@ -1,4 +1,4 @@
-import OrdersProducts from '@modules/orders/typeorm/entities/OrdersProducts';
+import OrdersProducts from '@modules/orders/infra/http/typeorm/entities/OrdersProducts';
 import {
   Entity,
   PrimaryGeneratedColumn,

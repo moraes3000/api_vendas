@@ -1,9 +1,8 @@
 import { getCustomRepository } from 'typeorm';
 
-import Product from '../typeorm/entities/Product';
-import { ProductRepository } from './../typeorm/repositories/ProductsRepository';
-
 import redisCache from '@shared/cache/RedisCache';
+import Product from '../infra/http/typeorm/entities/Product';
+import { ProductRepository } from '../infra/http/typeorm/repositories/ProductsRepository';
 class ListProductService {
   public async execute(): Promise<Product[]> {
     const productRepository = getCustomRepository(ProductRepository);

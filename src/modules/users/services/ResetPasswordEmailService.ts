@@ -3,8 +3,8 @@ import AppError from '@shared/errors/AppError';
 
 import { isAfter, addHours } from 'date-fns';
 
-import UserTokenRespository from '../typeorm/repositories/UserTokenRespository';
-import UsersRepository from '../typeorm/repositories/UsersRepositories';
+import UserTokenRespository from '../infra/http/typeorm/repositories/UserTokenRespository';
+import UsersRepository from '../infra/http/typeorm/repositories/UsersRepositories';
 import { hash } from 'bcryptjs';
 
 interface IRequest {
