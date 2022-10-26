@@ -4,7 +4,7 @@ import AppError from '@shared/errors/AppError';
 import Order from '../infra/http/typeorm/entities/Order';
 import OrdersRepository from '../infra/http/typeorm/repositories/OrdersRepository';
 
-import CustomersRepositories from '@modules/customers/typeorm/repositories/CustomersRepositories';
+import CustomersRepositories from '@modules/customers/infra/typeorm/repositories/CustomersRepositories';
 import { ProductRepository } from '@modules/products/infra/http/typeorm/repositories/ProductsRepository';
 
 interface IProduct {
