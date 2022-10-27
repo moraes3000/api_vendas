@@ -45,8 +45,6 @@ get api-vendas-PRODUCT_LIST
  ```
 
 
+chmod +x .docker/entrypoint.sh
 
-
-
-
-
+docker-compose up
